@@ -1,0 +1,20 @@
+CREATE TABLE `EmissionsBreakdown` (
+  `emissions_id` text,
+  `actor_id` text,
+  `year` int,
+  `emissions_scope` text,
+  `emissions_source` text,
+  `sector` text,
+  `ghgs_included` text,
+  `activity_description` text,
+  `activity_value` int,
+  `activity_unit` text,
+  `emissions_factor` int,
+  `emissions_value` int,
+  `reporting_boundary` text,
+  `gwp_used` text,
+  `methodology_id` text,
+  `datasource_id` text,
+  `last_updated` datetime,
+  PRIMARY KEY (`emissions_id`)
+);
