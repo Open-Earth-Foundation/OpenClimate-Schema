@@ -1,9 +1,9 @@
 CREATE TABLE `DataSource` (
-  `datasource_id` text,
-  `name` text,
+  `datasource_id` varchar(255),
+  `name` varchar(255),
   `last_updated` datetime,
-  `publisher` test,
+  `publisher` varchar(255),
   `published` datetime,
-  `URL` text,
+  `URL` varchar(255),
   PRIMARY KEY (`datasource_id`)
 );

@@ -1,15 +1,15 @@
 CREATE TABLE `Target` (
-  `target_id` text,
-  `actor_id` text,
-  `target_type` text,
+  `target_id` varchar(255),
+  `actor_id` varchar(255),
+  `target_type` varchar(255),
   `baseline_year` int,
   `target_year` int,
   `target_value` int,
-  `target_unit` text,
+  `target_unit` varchar(255),
   `bau_value` int,
   `is_net_zero` bool,
   `percent_achieved` int,
-  `data_source` text,
+  `data_source` varchar(255),
   `last_updated` datetime,
   PRIMARY KEY (`target_id`)
 );

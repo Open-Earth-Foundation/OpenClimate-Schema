@@ -1,5 +1,5 @@
 CREATE TABLE `TerritoryContext` (
-  `actor_id` text,
+  `actor_id` varchar(255),
   `area` int,
   `lat` int,
   `lng` int,

@@ -1,12 +1,12 @@
 CREATE TABLE "Actor" (
-  "actor_id" text,
-  "type" text,
-  "name" text,
-  "iso" text,
-  "flag" text,
-  "hq" text,
-  "is_part_of" text,
-  "is_owned_by" text,
+  "actor_id" varchar(255),
+  "type" varchar(255),
+  "name" varchar(255),
+  "iso" varchar(255),
+  "flag" varchar(255),
+  "hq" varchar(255),
+  "is_part_of" varchar(255),
+  "is_owned_by" varchar(255),
   PRIMARY KEY ("actor_id"),
   CONSTRAINT "FK_Actor.is_owned_by"
     FOREIGN KEY ("is_owned_by")

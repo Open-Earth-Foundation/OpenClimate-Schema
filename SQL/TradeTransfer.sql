@@ -1,10 +1,10 @@
 CREATE TABLE `TradeTransfer` (
-  `transaction_id` text,
-  `actor_from` text,
-  `actor_to` text,
-  `type` text,
-  `unit` text,
-  `value` text,
-  `datasource_id` text,
+  `transaction_id` varchar(255),
+  `actor_from` varchar(255),
+  `actor_to` varchar(255),
+  `type` varchar(255),
+  `unit` varchar(255),
+  `value` varchar(255),
+  `datasource_id` varchar(255),
   PRIMARY KEY (`transaction_id`)
 );
