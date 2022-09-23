@@ -1,4 +1,4 @@
-CREATE TABLE `InitiativesPledges` (
+CREATE TABLE `InitiativePledge` (
   `initiative_id` text,
   `actor_id` text,
   `initiative_type` text,

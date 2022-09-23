@@ -1,4 +1,4 @@
-CREATE TABLE `Actions` (
+CREATE TABLE `Action` (
   `action_id` text,
   `actor_id` text,
   `action_type` text,
@@ -11,4 +11,3 @@ CREATE TABLE `Actions` (
   `last_updated` datetime,
   PRIMARY KEY (`action_id`)
 );
-

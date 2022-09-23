@@ -1,4 +1,4 @@
-CREATE TABLE `Methodologies` (
+CREATE TABLE `Methodology` (
   `methodology_id` text,
   `date_updated` text,
   `methodology_link` text,

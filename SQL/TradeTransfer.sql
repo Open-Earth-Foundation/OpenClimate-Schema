@@ -1,4 +1,4 @@
-CREATE TABLE `TradesTransfer` (
+CREATE TABLE `TradeTransfer` (
   `transaction_id` text,
   `actor_from` text,
   `actor_to` text,
