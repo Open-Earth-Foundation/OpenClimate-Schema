@@ -10,5 +10,8 @@ CREATE TABLE `Action` (
   `datasource_id` varchar(255),
   `created` datetime,
   `last_updated` datetime,
-  PRIMARY KEY (`action_id`)
+  PRIMARY KEY (`action_id`),
+  CONSTRAINT "FK_Action.actor_id"
+    FOREIGN KEY ("actor_id")
+      REFERENCES "Actor"("actor_id"),
 );
