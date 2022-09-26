@@ -2,7 +2,6 @@ CREATE TABLE "Actor" (
   "actor_id" varchar(255),
   "type" varchar(255),
   "name" varchar(255),
-  "iso" varchar(255),
   "icon" varchar(255),
   "hq" varchar(255),
   "is_part_of" varchar(255),
