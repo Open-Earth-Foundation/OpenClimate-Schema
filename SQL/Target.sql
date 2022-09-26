@@ -10,6 +10,7 @@ CREATE TABLE `Target` (
   `is_net_zero` boolean,
   `percent_achieved` int,
   `data_source` varchar(255),
+  `created` datetime,
   `last_updated` datetime,
   PRIMARY KEY (`target_id`)
 );

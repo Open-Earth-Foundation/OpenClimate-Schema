@@ -5,6 +5,7 @@ CREATE TABLE `InitiativePledge` (
   `initiative_name` varchar(255),
   `initiative_statement` varchar(255),
   `datasource_id` varchar(255),
+  `created` datetime,
   `last_updated` datetime,
   PRIMARY KEY (`initiative_id`)
 );

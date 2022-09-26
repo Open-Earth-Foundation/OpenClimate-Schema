@@ -8,6 +8,7 @@ CREATE TABLE `EmissionsAgg` (
   `total_emissions` int,
   `methodology_id` varchar(255),
   `datasource_id` varchar(255),
+  `created` datetime,
   `last_updated` datetime,
   PRIMARY KEY (`emissions_id`)
 );

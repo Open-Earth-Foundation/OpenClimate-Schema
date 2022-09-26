@@ -5,5 +5,7 @@ CREATE TABLE `DataSource` (
   `publisher` varchar(255),
   `published` datetime,
   `URL` varchar(255),
+  `created` datetime,
+  `last_updated` datetime,
   PRIMARY KEY (`datasource_id`)
 );

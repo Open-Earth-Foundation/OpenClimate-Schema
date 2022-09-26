@@ -6,5 +6,7 @@ CREATE TABLE `TradeTransfer` (
   `unit` varchar(255),
   `value` varchar(255),
   `datasource_id` varchar(255),
+  `created` datetime,
+  `last_updated` datetime,
   PRIMARY KEY (`transaction_id`)
 );

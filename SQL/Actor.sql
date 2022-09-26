@@ -6,6 +6,8 @@ CREATE TABLE "Actor" (
   "hq" varchar(255),
   "is_part_of" varchar(255),
   "is_owned_by" varchar(255),
+  `created` datetime,
+  `last_updated` datetime,
   PRIMARY KEY ("actor_id"),
   CONSTRAINT "FK_Actor.is_owned_by"
     FOREIGN KEY ("is_owned_by")

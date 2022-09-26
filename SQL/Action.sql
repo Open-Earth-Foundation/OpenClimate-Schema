@@ -8,6 +8,7 @@ CREATE TABLE `Action` (
   `emissions_reductions` int,
   `percent_achieved` int,
   `datasource_id` varchar(255),
+  `created` datetime,
   `last_updated` datetime,
   PRIMARY KEY (`action_id`)
 );
