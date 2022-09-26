@@ -15,7 +15,7 @@ CREATE TABLE `EmissionsBreakdown` (
   `gwp_used` varchar(255),
   `methodology_id` varchar(255),
   `datasource_id` varchar(255),
-  `created` datetime,
-  `last_updated` datetime,
+  `created` timestamp,
+  `last_updated` timestamp,
   PRIMARY KEY (`emissions_id`)
 );

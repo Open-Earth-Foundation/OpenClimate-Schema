@@ -8,7 +8,7 @@ CREATE TABLE `TerritoryContext` (
   `gdp` int,
   `gdp_year` int,
   `admin_bound` geojson,
-  `created` datetime,
-  `last_updated` datetime,
+  `created` timestamp,
+  `last_updated` timestamp,
   PRIMARY KEY (`actor_id`)
 );

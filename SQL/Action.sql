@@ -8,8 +8,8 @@ CREATE TABLE `Action` (
   `emissions_reductions` int,
   `percent_achieved` int,
   `datasource_id` varchar(255),
-  `created` datetime,
-  `last_updated` datetime,
+  `created` timestamp,
+  `last_updated` timestamp,
   PRIMARY KEY (`action_id`),
   CONSTRAINT "FK_Action.actor_id"
     FOREIGN KEY ("actor_id")

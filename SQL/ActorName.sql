@@ -4,8 +4,8 @@ CREATE TABLE "ActorName" (
   "language" varchar(255),
   "preferred" boolean,
   "datasource_id" varchar(255),
-  "created" datetime,
-  "last_updated" datetime,
+  "created" timestamp,
+  "last_updated" timestamp,
   PRIMARY KEY ("actor_id", "language", "name"),
   CONSTRAINT "FK_ActorName.actor_id"
     FOREIGN KEY ("actor_id")

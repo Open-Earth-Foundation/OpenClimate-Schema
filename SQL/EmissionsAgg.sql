@@ -8,8 +8,8 @@ CREATE TABLE `EmissionsAgg` (
   `total_emissions` int,
   `methodology_id` varchar(255),
   `datasource_id` varchar(255),
-  `created` datetime,
-  `last_updated` datetime,
+  `created` timestamp,
+  `last_updated` timestamp,
   PRIMARY KEY (`emissions_id`),
   CONSTRAINT "FK_EmissionsAgg.actor_id"
     FOREIGN KEY ("actor_id")

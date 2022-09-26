@@ -7,8 +7,8 @@ CREATE TABLE "Actor" (
   "is_part_of" varchar(255), /* Where this actor is physically */
   "is_owned_by" varchar(255), /* Only for sites, which company owns them */
   "datasource_id" varchar(255), /* Where the record came from */
-  "created" datetime,
-  "last_updated" datetime,
+  "created" timestamp,
+  "last_updated" timestamp,
   PRIMARY KEY ("actor_id"),
   CONSTRAINT "FK_Actor.is_owned_by"
     FOREIGN KEY ("is_owned_by")

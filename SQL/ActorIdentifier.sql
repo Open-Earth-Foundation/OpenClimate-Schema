@@ -3,8 +3,8 @@ CREATE TABLE "ActorIdentifier" (
   "identifier" varchar(255),
   "namespace" varchar(255),
   "datasource_id" varchar(255),
-  "created" datetime,
-  "last_updated" datetime,
+  "created" timestamp,
+  "last_updated" timestamp,
   PRIMARY KEY ("identifier", "namespace"),
   CONSTRAINT "FK_ActorIdentfier.actor_id"
     FOREIGN KEY ("actor_id")
