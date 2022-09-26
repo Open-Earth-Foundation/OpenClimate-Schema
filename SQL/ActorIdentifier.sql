@@ -11,5 +11,5 @@ CREATE TABLE "ActorIdentifier" (
       REFERENCES "Actor"("actor_id"),
   CONSTRAINT "FK_ActorIdentfier.datasource_id"
     FOREIGN KEY ("datasource_id")
-      REFERENCES "DataSource"("datasource_id"),
+      REFERENCES "DataSource"("datasource_id")
 );
