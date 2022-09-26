@@ -3,5 +3,5 @@ CREATE TABLE `ActorName` (
   `name` varchar(255),
   `language` varchar(255),
   `preferred` bool,
-  PRIMARY KEY (`actor_id`)
+  PRIMARY KEY (`actor_id`, `language`, `name`)
 );
