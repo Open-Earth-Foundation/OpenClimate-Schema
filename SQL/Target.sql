@@ -7,7 +7,7 @@ CREATE TABLE `Target` (
   `target_value` int,
   `target_unit` varchar(255),
   `bau_value` int,
-  `is_net_zero` bool,
+  `is_net_zero` boolean,
   `percent_achieved` int,
   `data_source` varchar(255),
   `last_updated` datetime,
