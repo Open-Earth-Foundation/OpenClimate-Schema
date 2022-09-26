@@ -3,5 +3,8 @@ CREATE TABLE `ActorName` (
   `name` varchar(255),
   `language` varchar(255),
   `preferred` boolean,
-  PRIMARY KEY (`actor_id`, `language`, `name`)
+  PRIMARY KEY (`actor_id`, `language`, `name`),
+  CONSTRAINT "FK_ActorName.actor_id"
+    FOREIGN KEY ("actor_id")
+      REFERENCES "Actor"("actor_id"),
 );
