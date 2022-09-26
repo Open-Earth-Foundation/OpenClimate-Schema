@@ -7,5 +7,8 @@ CREATE TABLE `DataSource` (
   `URL` varchar(255),
   `created` datetime,
   `last_updated` datetime,
-  PRIMARY KEY (`datasource_id`)
+  PRIMARY KEY (`datasource_id`),
+  CONSTRAINT "FK_DataSource.publisher"
+    FOREIGN KEY ("publisher")
+      REFERENCES "Publisher"("id"),
 );
