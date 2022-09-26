@@ -3,7 +3,7 @@ CREATE TABLE "Actor" (
   "type" varchar(255),
   "name" varchar(255),
   "iso" varchar(255),
-  "flag" varchar(255),
+  "icon" varchar(255),
   "hq" varchar(255),
   "is_part_of" varchar(255),
   "is_owned_by" varchar(255),
