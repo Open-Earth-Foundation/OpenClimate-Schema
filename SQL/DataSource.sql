@@ -9,5 +9,5 @@ CREATE TABLE "DataSource" (
   PRIMARY KEY ("datasource_id"),
   CONSTRAINT "FK_DataSource.publisher"
     FOREIGN KEY ("publisher")
-      REFERENCES "Publisher"("id"),
+      REFERENCES "Publisher"("id")
 );
