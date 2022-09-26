@@ -1,11 +1,11 @@
 CREATE TABLE "Actor" (
-  "actor_id" varchar(255),
-  "type" varchar(255),
-  "name" varchar(255),
-  "icon" varchar(255),
+  "actor_id" varchar(255), /* Unique identifier for the Actor; ISO-3166, UN/LOCODE, other */
+  "type" varchar(255), /* One of: planet, country, adm1, city, organization, site */
+  "name" varchar(255), /* Default; see ActorName for alternates and languages */
+  "icon" varchar(255), /* URI of a square, small avatar icon, like a flag or logo */
   "hq" varchar(255),
-  "is_part_of" varchar(255),
-  "is_owned_by" varchar(255),
+  "is_part_of" varchar(255), /* Where this actor is physically */
+  "is_owned_by" varchar(255), /* Only for sites, which company owns them */
   `created` datetime,
   `last_updated` datetime,
   PRIMARY KEY ("actor_id"),
