@@ -16,5 +16,5 @@ CREATE TABLE "EmissionsAgg" (
       REFERENCES "Methodology"("methodology_id"),
   CONSTRAINT "FK_EmissionsAgg.datasource_id"
     FOREIGN KEY ("datasource_id")
-      REFERENCES "DataSource"("datasource_id"),
+      REFERENCES "DataSource"("datasource_id")
 );
