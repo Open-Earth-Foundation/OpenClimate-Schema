@@ -1,3 +1,25 @@
+/*
+This table captures ...
+
+sector_id:
+    description: unique id
+    format: 
+name:
+    description: human readable name
+    format:
+namespace:
+    description: Namespace or vocabulary for the sector
+    format: 
+datasource_id:
+    description: Where the record came from
+    format: <publisher>:<dataset_doi>:<version>
+created:
+    description: date record created
+    format: timestamp
+last_updated:
+    description: data record created
+    format: timestamp
+*/
 CREATE TABLE "Sector" (
   "sector_id" varchar(255), /* Unique ID */
   "name" varchar(255), /* human-readable name; TODO: i18n */
