@@ -12,7 +12,7 @@ CREATE TABLE "Target" (
   "bau_value" int, /* ? */
   "is_net_zero" boolean, /* Will this get them to net zero? */
   "percent_achieved" int, /* ? */
-  "data_source" varchar(255), /* Source of this data */
+  "datasource_id" varchar(255), /* Source of this data */
   "created" timestamp,
   "last_updated" timestamp,
   PRIMARY KEY ("target_id"),
