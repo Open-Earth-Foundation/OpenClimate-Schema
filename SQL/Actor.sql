@@ -15,7 +15,7 @@ CREATE TABLE "Actor" (
       REFERENCES "Actor"("actor_id"),
   CONSTRAINT "FK_Actor.is_part_of"
     FOREIGN KEY ("is_part_of")
-      REFERENCES "Actor"("actor_id"),
+      REFERENCES "Actor"("actor_id")
   CONSTRAINT "FK_Actor.datasource_id"
     FOREIGN KEY ("datasource_id")
       REFERENCES "DataSource"("datasource_id")
