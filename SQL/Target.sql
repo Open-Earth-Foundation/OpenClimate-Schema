@@ -3,6 +3,7 @@
 CREATE TABLE "Target" (
   "target_id" varchar(255), /* Unique identifier for this target */
   "actor_id" varchar(255), /* Actor responsible for the target */
+  "initiative_id" varchar(255), /* Initiative the target belongs to (e.g. Paris Agreement, GCoM, ...) */
   "target_type" varchar(255),
   "baseline_year" int, /* Year of comparison, YYYY */
   "target_year" int, /* Year of completion, YYYY */
@@ -23,5 +24,8 @@ CREATE TABLE "Target" (
       REFERENCES "Actor"("actor_id"),
   CONSTRAINT "FK_Target.datasource_id"
     FOREIGN KEY ("datasource_id")
-      REFERENCES "DataSource"("datasource_id")
+      REFERENCES "DataSource"("datasource_id"),
+  CONSTRAINT "FK_Target.initiative_id"
+    FOREIGN KEY ("initiative_id")
+      REFERENCES "InitiativePledge"("initiative_id")
 );
