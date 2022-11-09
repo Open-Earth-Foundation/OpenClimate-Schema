@@ -84,6 +84,7 @@ but it does require more work on the part of importers.
 actors. When we need to include information that's specific for particular
 kinds of actors, we use the [Tag](#tag) subsystem to tag rows in tables with
 extra information.
+- `Multiple sources of truth`. For emissions data, we track multiple records of the same information, to provide comparison of methodologies and reporting style. For example, there are records for emissions in the United States from both PRIMAP and the UNFCCC, with about 0.3% difference. For non-emissions contextual data, like population, area, or GDP, multiple sources of truth aren't an important part of this data set, so we only track the best source we can get. For targets, we try to include one version of a target, even if it's mentioned in different data sources.
 
 # Table details
 
@@ -119,37 +120,85 @@ identifier namespaces onto this domain.
     most relevant national identifier for that site, typically by an environmental regulator or tax agency. For example, a factory in
     Canada tracked by the Environment and Climate Change Canada (ECCC) has
     actor_id `CA:ECCC:10001`.
-- "type"
-- "name"
-- "icon"
-- "is_part_of"
-- "is_owned_by"
-- "datasource_id"
-- "created"
-- "last_updated"
+    - For planet Earth, `EARTH` is the actor ID. No other planets so far!
+- `type`: A string representing the type of actor. This is less necessary than it seems, but it's helpful for managing geographical or organizational hierarchies. The main types in use:
+    - `planet`: Only Earth.
+    - `country`: nation-state or territory. Typically, anything
+    with an ISO 3166-1 code.
+    - `adm1`: top-level administrative region within a country. Typically,
+    states or provinces.
+    - `adm2`: second-level administrative regions. For example, England is
+    an `adm1` within Great Britain, and Cornwall is an `adm2` within England.
+    - `city`: a city, town, or village. For example, Richmond, Quebec, Canada.
+    - `organization`: a private entity, like a corporation.
+    - `site`: an emissions site, typically owned by an organization, like an
+    office building, data center, mine, farm, power plant or factory.
+- `name`: A default name to use for this actor. See the [ActorName](#actorname) table for more elaborate ways to handle multiple names in multiple languages.
+- `icon`: Full URL of a small (512px x 512px or less) image representing
+the actor. For public actors, this will be a flag. For private actors, this may be a logo. This is often null.
+- `is_part_of`: actor_id of the immediate geographical parent of the Actor. For instance, the city of Jujuy (AR JUJ) is part of Jujuy state (AR-Y) which in turn is part of Argentina (AR), which is part of Earth (EARTH). This column only contains the most immediate parent; getting higher-level parents requires repeated queries. For `organization` actors, this is typically the
+location of the main office, corporate registration, or other main jurisdiction, although this can be tricky for many large organizations. For `site` actors, this is usually a `city`, but sometimes an `adm1` or `adm2` if the site is outside city limits in rural, wilderness, or unincorporated territory.
+- `is_owned_by`: an ownership or management relationship, not necessarily geographical. This is typically used to link a `site` to its owning `organization`. Public actors have null values here.
+- `datasource_id`: ID of the [DataSource](#datasource) this actor came from. Typically from geographical or government registries, but sometimes actors are added from emissions or targets datasets that weren't otherwise tracked.
+- `created`: When this row was added to the table. Not necessarily publication date; see the DataSource for that metadata.
+- `last_updated`: When this row was changed. Often the same as `created`. Not necessarily publication date; see the DataSource for that metadata.
 
 ### ActorIdentifier
 
-"actor_id" varchar(255),
-  "identifier" varchar(255),
-  "namespace" varchar(255),
-  "datasource_id" varchar(255),
-  "created" timestamp,
-  "last_updated" timestamp,
+This is the table we use to track structured identifiers for Actors in different namespaces from our default ones. It helps with harmonizing datasets, especially those that use a structured identity format. For human-readable names, see [ActorName](#actorname).
+
+The rows are unique on (`identifier`, and `namespace`). For example, there is only one entry for identifier '300' in namespace 'ISO-3166-1 numeric', with
+actor_id = 'GR' (Greece).
+
+To avoid complicated queries, we include the default `actor_id` namespace
+in the ActorIdentifier table, too. So, there is an `ActorIdentifier` row
+in `namespace` 'ISO-3166-1 alpha-2' with `identifier` 'GR' and `actor_id` 'GR'. This makes getting all the identifiers for an Actor, or looking up an actor by identifier and namespace, a simpler process, at the expense of slightly more storage and slightly ridiculous rows of data.
+
+- `actor_id`: The identified [Actor](#actor).
+- `identifier`: A string identifier. Numeric identifiers are represented as strings. Unique within a namespace, but probably not unique outside of them.
+- `namespace`: The namespace of the identifier. Typically this is the name
+of a structured vocabulary of identifiers. There's not much governance on the
+namespaces, but here are some known values:
+    - 'UNLOCODE'
+    - 'Wikidata'
+    - 'ISO-3166-1 alpha-3'
+    - 'World Bank'
+    - 'CDP'
+    - 'ISO-3166-2'
+    - 'ISO-3166-1 numeric'
+    - 'ISO-3166-1 alpha-2'
+- `datasource_id`: ID of the [DataSource](#datasource) this mapping came from. Sometimes from geographical data sources, sometimes from the first imports from a target or emissions dataset.
+- `created`: When this row was added to the table. Not necessarily publication date; see the DataSource for that metadata.
+- `last_updated`: When this row was changed. Often the same as `created`. Not necessarily publication date; see the DataSource for that metadata.
 
 ### ActorName
 
-  "actor_id" varchar(255),
-  "name" varchar(255),
-  "language" varchar(255),
-  "preferred" boolean,
-  "datasource_id" varchar(255),
-  "created" timestamp,
-  "last_updated" timestamp,
+A human-readable name for an Actor. Actors can have multiple names in the same language, and multiple names in different languages. Two different
+actors can have the same name in the same language, or in different languages.
+
+For example, there are 21 actors with an `ActorName` row with name "Springfield", in the USA, Canada and South Africa. Actor names are sometimes but not always unique within a parent geographical (`is_part_of`) boundary.
+
+See [ActorIdentifier](#actoridentifier) for structured identifiers in a namespace.
+
+- `actor_id`: The [Actor](#actor) with the name.
+- `name`: A human-readable name for the Actor. May have accented characters
+or characters in other scripts, or right-to-left (RTL) presentation.
+- `language`: the language for the name. Usually a 2-letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), unless such a code doesn't exist, in which case we use the 3-letter ISO 639-2 code.
+- `preferred`: Is this the preferred name to use for the actor in this language? Preference might include these factors, in no particular order:
+    - Readability (Cocos Islands more readable than Territory of Cocos (Keeling) Islands, The)
+    - Brevity (Bolivia is briefer than Plurinational State of Bolivia)
+    - Frequency of use
+    - Official use (example: Mumbai vs Bombay, Alphabet Inc. vs Google, Deere & Company vs. John Deere)
+    - Current use
+    - Word order
+    - Clarity (example: United Kingdom is clearer than UK, North Korea is clearer than DPRK)
+- `datasource_id`: ID of the [DataSource](#datasource) this name mapping came from. Sometimes from geographical data sources, sometimes from the first imports from a target or emissions dataset.
+- `created`: When this row was added to the table. Not necessarily publication date; see the DataSource for that metadata.
+- `last_updated`: When this row was changed. Often the same as `created`. Not necessarily publication date; see the DataSource for that metadata.
 
 ## Public-sector actor
 
-(TBD)
+For governments, we keep information about the territory governed as well as simple population and GDP metrics.
 
 ### Territory
 
