@@ -305,6 +305,27 @@ Each row represents a sector of activity that produces CO2 or equivalent greenho
 - `created`: When this row was added to the table. Not necessarily publication date; see the DataSource for that metadata.
 - `last_updated`: When this row was changed. Often the same as `created`. Not necessarily publication date; see the DataSource for that metadata.
 
+### EmissionsBreakdown
+
+This table represents a breakdown of the total emissions by the actor according to the emissions scope, activity that caused the emissions, and the greenhouse gases included in the emissions reported, whenever the details are made available. The rows are unique by emissions ID, sector ID, scope, and greenhouse gases included. 
+
+The sum of the emissions values for the different breakdowns should be more or less equal to the [EmissionsAgg](#emissionsagg) row's total, but discrepancies might occur due to reporting differences that aren't represented in this schema.
+
+- `emissions_id`: Which emissions aggregate this is a part of.
+- `scope`: An integer for the scope; one of 1, 2, or 3.
+- `sector_id`: The sector for the emissions.
+- `ghgs_included`: Type of greenhouse gas included in the breakdown, can be CO2 only, CO2 + other gases, or a combination of the gases included in the emissions (e.g., CO2 + CH4) 
+- `activity_description`: Short description of the activity which produces the greenhouse gases (e.g., production of electricity). See Appendix D of the [GHG Protocol](https://ghgprotocol.org/sites/default/files/standards/ghg-protocol-revised.pdf) for examples
+- `activity_value`: Integer value of activity recorded that corresponds to the emissions produced 
+- `activity_unit`: Units which activity value was recorded in (e.g., MWh)
+- `emissions_factor`: Emissions factors used to calculate the amount of emission produced from activity recorded. See [IPCC's Emission Factor Database](https://www.ipcc-nggip.iges.or.jp/EFDB/main.php) for examples of emissions factors used to calculate emissions from activity recorded.
+- `emissions_value`: metric tonnes of CO2 equivalent.
+- `reporting_boundary`: Administrative and/or geographical boundaries included in the activity and emissions recorded. For subnational actors, this corresponds to whether emissions cover `CommunityWide` emissions or only emissions from `MunicipalOperations`; for companies and facilities, this corresponds to the set of business units/functions covered by the emissions.
+- `gwp_used`: Different time horizons used to calculate the [global warming potentials](https://unfccc.int/process/transparency-and-reporting/greenhouse-gas-data/greenhouse-gas-data-unfccc/global-warming-potentials) of non-CO2 greenhouse gases. Can be `gwp20`, `gwp100`, or `gwp500`.  
+- `created`: When this row was added to the table. Not necessarily publication date; see the DataSource for that metadata.
+- `last_updated`: When this row was changed. Often the same as `created`. Not necessarily publication date; see the DataSource for that metadata.
+
+
 ## Targets
 
 This cluster of tables represents targets for emissions reductions or similar mitigations for climate change.
