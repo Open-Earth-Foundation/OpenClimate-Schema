@@ -5,6 +5,7 @@
 CREATE TABLE "DataSourceApproved" (
   "datasource_id" varchar(255), /* Which data source */
   "ghg_target_percent_achieved" REAL,
+  "notes" TEXT, /* why score chosen for each field */
   "created" timestamp,
   "last_updated" timestamp,
   PRIMARY KEY ("datasource_id"),
