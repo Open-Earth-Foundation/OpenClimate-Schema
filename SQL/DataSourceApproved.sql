@@ -4,7 +4,7 @@
 
 CREATE TABLE "DataSourceApproved" (
   "datasource_id" varchar(255), /* Which data source */
-  "ghg_target_percent_achieved" REAL,
+  "ghg_target_percent_achieved" REAL, /* quality score between 0 - 1 */
   "notes" TEXT, /* why score chosen for each field */
   "created" timestamp,
   "last_updated" timestamp,
